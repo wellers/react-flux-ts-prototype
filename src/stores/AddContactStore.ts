@@ -1,15 +1,14 @@
 import flux = require('flux');
 import Action = require('../core/Action');
-
 import { Store } from "../core/ComponentsBase";
 import { ContactApi, Contact } from "../apis/ContactApi";
 import { SingleSelectBoxViewModel } from "../components/SingleSelectBox";
 
 export class AddContactStore extends Store<AddContactViewModel> {
     constructor(dispatcher: flux.Dispatcher<Action>) {
-        super();
-        
-        this.viewModel = this.getDefaultAddContactsViewModel();
+        super();        
+		this.viewModel = this.getDefaultAddContactsViewModel();
+
         dispatcher.register((a: Action) => {              
             if (a instanceof UserRequestedEdit) {
                 this.fix(this.viewModel, a.viewModel);               
@@ -20,6 +19,7 @@ export class AddContactStore extends Store<AddContactViewModel> {
 
    getDefaultAddContactsViewModel(): AddContactViewModel { 
        var titles = ContactApi.getTitles();
+
        return new AddContactViewModel(
             {  
                isDropDownOpen: false, 
@@ -55,6 +55,7 @@ export class AddContactViewModel {
     surname: string;
     saveRequested: boolean;
     showValidationError: boolean;
+
     constructor(title: SingleSelectBoxViewModel<string>, firstName: string, surname: string, saveRequested: boolean, showValidationError: boolean) {
         this.title = title;
         this.firstName = firstName;
@@ -66,6 +67,7 @@ export class AddContactViewModel {
 
 export class UserRequestedEdit extends Action {
     viewModel: AddContactViewModel;
+
     constructor(viewModel: AddContactViewModel) {
         super(Action.Source.View);
         this.viewModel = viewModel;

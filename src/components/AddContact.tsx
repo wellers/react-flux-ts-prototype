@@ -1,6 +1,5 @@
 import flux = require('flux');
 import * as React from "react";
-
 import Action = require('../core/Action')
 import { EventHandler, IHaveStore, StatefulComponent } from "../core/ComponentsBase";
 import { TextInput } from "./TextInput";
